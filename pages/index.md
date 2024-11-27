@@ -1,6 +1,7 @@
 ---
 title: Listă candidați alegeri parlamentare 2024
 hideToc: true
+hide_title: true
 ---
 
 
@@ -64,7 +65,7 @@ Funcție,
 'https://google.ro/search?q=' || Nume || ' '  || Prenume  AS Caută
 FROM candidati  
 WHERE ('${inputs.partid.value}' = 'toate' OR Partid = '${inputs.partid.value}')
-AND (    Circumscripție = '${inputs.harta.judet}'  ) 
+AND (Circumscripție = '${inputs.judet.value}' OR  '${inputs.judet.value}' == 'toate') 
 
 AND ('${inputs.camere.value}' = 'toate' OR Funcție = '${inputs.camere.value}')
 ORDER BY "Pozitie lista" ASC
@@ -98,40 +99,51 @@ select   cod_judet, circumscripție as judet, count(*) as count from candidati g
 
 ```
 
- <Alert status="info">
-<b>{count_candidati[0].count}</b> candidați, <b>{count_candidati_senat[0].count}</b> pentru Senat și <b>{count_candidati_cd[0].count}</b> pentru Camera Deputaților
-<!-- , dintre care <b>{procent_gen[2].Percentage}%</b> sunt bărbați. -->
-</Alert>
+<div class="grid grid-flow-row-dense grid-cols-3">
+  <div class="col-span-2">
+    <AreaMap 
+        data={count_jud } 
+        areaCol=cod_judet
+        geoJsonUrl='/assets/gis/ro.geojson'
+        geoId=mnemonic
+        value=count
+        startingZoom = 6
+        link=judet
+        height=390
+    /> 
+  </div>
+  <div class="text-2xl  m-2 bg-sky-50">
+
+  <h2 class="bg-sky-200 px-7 py-4">Listă candidați <b>alegeri parlamentare 2024</b></h2>
+  
 
 
-<AreaMap 
-    data={count_jud } 
-    areaCol=cod_judet
-    geoJsonUrl='/assets/gis/ro.geojson'
-    geoId=mnemonic
-    value=count
-    startingZoom = 6
-    name=harta
-    height=390
-/>
+
+<div class="px-7 py-4 pt-6"> 
+   <b>{count_candidati[0].count}</b> candidați, <b>{count_candidati_senat[0].count}</b> pentru Senat și <b>{count_candidati_cd[0].count}</b> pentru Camera Deputaților, dintre care <b>{procent_gen[0].Percentage}%</b> sunt bărbați.
+</div>
+
+<div class="text-base	 px-6">Apasă pe hartă sau caută în tabelul de mai jos. </div>
+
+   
+  </div>
+</div>
+
  
- 
 
-## Caută candidați  {#if inputs.harta.judet != true} în {inputs.harta.judet} {/if}
+## Caută candidați  {#if inputs.judet.value != true} în județul **{inputs.judet.value}** {/if}
 
-<!--  <Dropdown 
+  <Dropdown 
     data={xjudete} 
     name=judet 
     value=judet 
     title="Județ" 
     defaultValue={['toate']}
-/> -->
+/> 
+
+
 
  
-
-
-
-{#if inputs.harta.judet != true}
 
 <Dropdown 
     data={xpartide} 
@@ -160,7 +172,7 @@ select   cod_judet, circumscripție as judet, count(*) as count from candidati g
     <Column id=Caută contentType=link linkLabel="🔎"/> 
 </DataTable>
 
-{/if}
+ 
 
 ---
 
