@@ -17,6 +17,7 @@ export let data;
 	-logo="/assets/votcorect-alb.svg"
 	maxWidth=1800
 	hideSidebar=true
+	hideTOC
 	fullWidth=true
 	hideHeader=true
  >

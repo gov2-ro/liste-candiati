@@ -80,8 +80,7 @@ echartsOptions={{ xAxis: { axisLabel: {rotate: 75}  }}}
     </div>
  </div>
 
-  <a href="/{params.judet}/{partid.Partid}" class="hover:bg-blue-500 hover:text-white px-1 hover:rounded-mx inline-block" >
-    
+  <a href="/{params.judet}/{partid.Partid}" class="hover:bg-blue-500 hover:text-white px-1 hover:rounded-mx inline-block" >ss   
   </a>
  {/if}
 {/each} 
