@@ -2,6 +2,8 @@
 title: Listă candidați alegeri parlamentare 2024
 hideToc: true
 hide_title: true
+og:
+  image: /assets/lista-candidati.png
 ---
 
 
@@ -56,6 +58,37 @@ FROM candidati
 GROUP BY gen;
 ```
 
+```sql gen_top
+
+SELECT 
+    Partid,
+    ROUND(
+        COUNT(CASE WHEN Gen = 'F' AND "Pozitie lista" = 1 THEN 1 END) * 100.0 / COUNT(*),
+        2
+    ) AS Percent_F_Pozitie1
+FROM 
+    candidati
+GROUP BY 
+    Partid
+ORDER BY 
+    Percent_F_Pozitie1 DESC LIMIT 14;
+
+```
+
+```sql gen_bottom
+
+SELECT 
+    Partid,
+    ROUND( COUNT(CASE WHEN Gen = 'F' AND "Pozitie lista" = 1 THEN 1 END) * 100.0 / COUNT(*), 2   ) AS Percent_F_Pozitie1
+FROM    candidati
+GROUP BY Partid
+HAVING 
+    ROUND( COUNT(CASE WHEN Gen = 'F' AND "Pozitie lista" = 1 THEN 1 END) * 100.0 / COUNT(*), 2 ) > 2
+ORDER BY     Percent_F_Pozitie1 ASC
+LIMIT 14;
+
+```
+
 ```sql candidati
 SELECT  "Pozitie lista" as Poz, 
 Prenume || ' ' || Nume AS Nume , 
@@ -84,7 +117,6 @@ select 'toate' as judet
 union
 select distinct Circumscripție as judet	from candidati order by Circumscripție DESC
 ```
-
  
 ```sql partide
 select 'toate' as partid, 9999 as count
@@ -114,22 +146,16 @@ select   cod_judet, circumscripție as judet, count(*) as count from candidati g
   </div>
   <div class="text-2xl  m-2 bg-sky-50">
 
-  <h2 class="bg-sky-200 px-7 py-4">Listă candidați <b>alegeri parlamentare 2024</b></h2>
-  
+  <h2 class="bg-sky-200 px-7 py-4">Listă candidați <b>alegeri parlamentare 2024</b></h2> 
 
+  <div class="px-7 py-4 pt-6"> 
+    <b>{count_candidati[0].count}</b> candidați, <b>{count_candidati_senat[0].count}</b> pentru Senat și <b>{count_candidati_cd[0].count}</b> pentru Camera Deputaților, dintre care <b>{procent_gen[0].Percentage}%</b> sunt bărbați.
+  </div>
 
-
-<div class="px-7 py-4 pt-6"> 
-   <b>{count_candidati[0].count}</b> candidați, <b>{count_candidati_senat[0].count}</b> pentru Senat și <b>{count_candidati_cd[0].count}</b> pentru Camera Deputaților, dintre care <b>{procent_gen[0].Percentage}%</b> sunt bărbați.
-</div>
-
-<div class="text-base	 px-6">Apasă pe hartă sau caută în tabelul de mai jos. </div>
-
-   
+    <div class="text-base	 px-6">Apasă pe hartă sau caută în tabelul de mai jos. </div>
+ 
   </div>
 </div>
-
- 
 
 ## Caută candidați  {#if inputs.judet.value != true} în județul **{inputs.judet.value}** {/if}
 
@@ -140,10 +166,6 @@ select   cod_judet, circumscripție as judet, count(*) as count from candidati g
     title="Județ" 
     defaultValue={['toate']}
 /> 
-
-
-
- 
 
 <Dropdown 
     data={xpartide} 
@@ -197,6 +219,18 @@ colorPalette={[
         ]}
 echartsOptions={{ xAxis: { axisLabel: {rotate: 45,  interval: 0}, type: "category"  }}}
 />
+
+<div class="md:grid grid-cols-2 gap-8">
+<div>
+Cele mai multe femei în prima poziție pe listă
+<DataTable data={gen_top} rows=14 />
+</div>
+<div>
+Cele mai puține femei în prima poziție pe listă
+
+<DataTable data={gen_bottom} rows=14 /></div>
+</div>
+
 
 
 ---

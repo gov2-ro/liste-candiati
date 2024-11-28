@@ -36,9 +36,13 @@ SELECT
 
 ```sql candidati_cd
 SELECT  "Pozitie lista" as poz, 
-Prenume || ' ' || Nume AS Nume , 
-Partid,
-Circumscripție as judet
+Prenume || ' ' || Nume AS Nume , gen,
+Partid, gen,
+Circumscripție as judet,
+ 'https://google.ro?search=' || Nume  || ' ' || Prenume || ' ' || Partid || ' Senat'  AS G, 
+    'https://news.google.com/search?q=' || Nume  || ' ' || Prenume || ' ' || Partid || '&hl=ro&gl=RO&ceid=RO:ro' AS gN,
+    'https://duckduckgo.com/?q=' || Nume  || ' ' || Prenume || ' ' || Partid || '&kp=-2' AS DDG, 
+    'https://www.newsnow.com/ro/?search=' || Nume  || ' ' || Prenume || ' ' || Partid || '&lang=ro' AS NN 
 FROM candidati WHERE Circumscripție = '${params.judet}'  AND  Funcție ='CD'  ORDER BY "Pozitie lista" ASC
 ```
 
@@ -80,7 +84,7 @@ echartsOptions={{ xAxis: { axisLabel: {rotate: 75}  }}}
     </div>
  </div>
 
-  <a href="/{params.judet}/{partid.Partid}" class="hover:bg-blue-500 hover:text-white px-1 hover:rounded-mx inline-block" >ss   
+  <a href="/{params.judet}/{partid.Partid}" class="hover:bg-blue-500 hover:text-white px-1 hover:rounded-mx inline-block" >   
   </a>
  {/if}
 {/each} 

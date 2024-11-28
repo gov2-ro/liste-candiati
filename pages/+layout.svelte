@@ -19,7 +19,7 @@ export let data;
 	hideSidebar=true
 	hideTOC
 	fullWidth=true
-	hideHeader=true
+	shideHeader=true
  >
 	<slot slot="content" />
 </EvidenceDefaultLayout>

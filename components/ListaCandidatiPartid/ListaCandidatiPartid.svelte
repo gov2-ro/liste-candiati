@@ -3,7 +3,7 @@
     export let camera;
     export let title;
     export let xpartid;
-    export let xjudet;
+  
 </script>
 
 <div class="max-w-md mx-auto mt-10">
