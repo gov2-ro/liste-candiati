@@ -1,6 +1,8 @@
 ---
 title: Listă candidați județ, alegeri parlamentare 2024
 hide_title: true
+og:
+  image: https://raw.githubusercontent.com/gov2-ro/liste-candiati/refs/heads/main/static/assets/lista-candidati.png
 ---
 
 ```sql partide_judet
@@ -75,11 +77,11 @@ echartsOptions={{ xAxis: { axisLabel: {rotate: 75}  }}}
 {#if 1==1}
   ### {partid.Partid}
 
-<div class="flex">
-    <div class="grow w-1">       
+<div class="md:flex gap-6">
+    <div class="grow-w-1">       
         <ListaCandidatiPartid xpartid={partid.Partid} xjudet={params.judet} candidati={candidati_senat} camera="senat" title="Senat" />
     </div>
-    <div class="grow w-1">
+    <div class="grow-w-1">
         <ListaCandidatiPartid xpartid={partid.Partid} xjudet={params.judet} candidati={candidati_cd} camera="camera deputaților" title="Camera Deputaților" />
     </div>
  </div>

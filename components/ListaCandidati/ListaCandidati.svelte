@@ -4,12 +4,12 @@
     export let title;
 </script>
 
-<div class="max-w-md mx-auto mt-10">
-    <h4 class="font-bold">{title }</h4>
+<div class="xmax-w-md mx-auto mt-10 p-0 pb-3 rounded shadow border">
+    <h4 class="bg-sky-100 text-center py-1 font-normal mb-3 font-bold">{title}</h4>
     <div class="my-2"></div>
     {#each candidati as candidat}
     
-    <div class="flex  relative  hover:bg-gray-100 group candidat gen-{candidat.gen}">
+    <div class="flex  relative leading-none rounded-md px-3 py-1 hover:bg-gray-100 group candidat gen-{candidat.gen}">
         <div class="flex-0">
             <span class="font-bold">{candidat.poz}</span>
             <b class="ml-2 nume">{candidat.Nume}</b>

@@ -2,6 +2,8 @@
 title: Candidați 
 hide_title: true
 hide_table_of_contents: true
+og:
+  image: https://raw.githubusercontent.com/gov2-ro/liste-candiati/refs/heads/main/static/assets/lista-candidati.png
 ---
 
 ```sql judete
@@ -36,11 +38,11 @@ select  partid, COUNT(*) as count from candidati  WHERE Circumscripție = '${par
 
 # Candidați {params.partid} {params.judet}
 
-<div class="flex">
-    <div class="grow w-1">       
+<div class="md:flex gap-6">
+    <div class="grow-w-1">        
         <ListaCandidati candidati={candidati_senat} camera="senat" title="Senat" />
     </div>
-    <div class="grow w-1">
+    <div class="grow-w-1">
         <ListaCandidati candidati={candidati_cd} camera="camera deputaților" title="Camera Deputaților" />
     </div>
  </div>

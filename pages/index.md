@@ -3,7 +3,7 @@ title: Listă candidați alegeri parlamentare 2024
 hideToc: true
 hide_title: true
 og:
-  image: /assets/lista-candidati.png
+  image: https://raw.githubusercontent.com/gov2-ro/liste-candiati/refs/heads/main/static/assets/lista-candidati.png
 ---
 
 
@@ -131,7 +131,7 @@ select   cod_judet, circumscripție as judet, count(*) as count from candidati g
 
 ```
 
-<div class="grid grid-flow-row-dense grid-cols-3">
+<div class="grid grid-flow-row-dense lg:grid-cols-3">
   <div class="col-span-2">
     <AreaMap 
         data={count_jud } 
