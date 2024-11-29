@@ -24,7 +24,7 @@ export let data;
 	<slot slot="content" />
 </EvidenceDefaultLayout>
 
-<div class="promo-obs flex items-center justify-center bottom-[1em] right-[1em] absolute">
+<div class="promo-obs flex items-center justify-center  ">
 	<a class=" rounded-lg border-slate-100    border bg-yellow-100 hover:bg-yellow-200	 py-1 px-2 mx-2   shadow" id="obsreg" target="_blank" href="https://votcorect.ro/prezidentiale-parlamentare-2024/observatori/#inregistrare"> 🙏 înregistrează-te ca <b>observator</b> ✨✓</a> &nbsp; 
 	<a class=" rounded-lg border-slate-100    border bg-sky-200 hover:bg-sky-300	 py-1 px-2 mx-2   shadow" id="obsreg" target="_blank" href="https://votcorect.ro/prezidentiale-parlamentare-2024/doneaza/">Susține Vot Corect</a>
 </div>

@@ -18,7 +18,8 @@ SELECT * FROM (
 
 
 ```sql judete
-select  Circumscripție, cod_judet, COUNT(*) AS nr_candidati	from candidati where cod_judet != 'diaspora'  GROUP BY Circumscripție, cod_judet order by Circumscripție ASC
+-- select  Circumscripție, cod_judet, COUNT(*) AS nr_candidati	from candidati where cod_judet != 'diaspora'  GROUP BY Circumscripție, cod_judet order by Circumscripție ASC
+select  Circumscripție, cod_judet, COUNT(*) AS nr_candidati	from candidati GROUP BY Circumscripție, cod_judet order by Circumscripție ASC
 ```
 
 ```sql partide
@@ -48,7 +49,6 @@ select  COUNT(*) as count from candidati  WHERE  Funcție = 'CD'
 ```sql count_candidati_senat
 select  COUNT(*) as count from candidati  WHERE  Funcție = 'S'
 ```
-
 
 ```sql procent_gen
 SELECT 
@@ -127,23 +127,25 @@ select partid, count(*) as count from candidati group by partid order by count D
 
 ```sql count_jud 
 
-select   cod_judet, circumscripție as judet, count(*) as count from candidati group by circumscripție, cod_judet
+-- select   cod_judet, circumscripție || '/' as judet, count(*) as count from candidati group by circumscripție, cod_judet
+select   cod_judet, circumscripție  as judet, count(*) as count from candidati group by circumscripție, cod_judet
 
 ```
 
 <div class="grid grid-flow-row-dense lg:grid-cols-3">
-  <div class="col-span-2">
-    <AreaMap 
+   <div class="col-span-2">
+   
+      <AreaMap 
         data={count_jud } 
         areaCol=cod_judet
-        geoJsonUrl='/assets/gis/ro.geojson'
+        geoJsonUrl='/assets/gis/ro_judete_poligon-geo-.json'
         geoId=mnemonic
         value=count
         startingZoom = 6
         link=judet
         height=390
-    /> 
-  </div>
+    />       
+  </div>  
   <div class="text-2xl  m-2 bg-sky-50">
 
   <h2 class="bg-sky-200 px-7 py-4">Listă candidați <b>alegeri parlamentare 2024</b></h2> 
@@ -152,12 +154,13 @@ select   cod_judet, circumscripție as judet, count(*) as count from candidati g
     <b>{count_candidati[0].count}</b> candidați, <b>{count_candidati_senat[0].count}</b> pentru Senat și <b>{count_candidati_cd[0].count}</b> pentru Camera Deputaților, dintre care <b>{procent_gen[0].Percentage}%</b> sunt bărbați.
   </div>
 
-    <div class="text-base	 px-6">Apasă pe hartă sau caută în tabelul de mai jos. </div>
+    <div class="text-base	 px-6">Caută județul (incl. <em>diaspora</em> și <em>minorități</em>) în tabelul de mai jos. </div>
  
   </div>
 </div>
 
 ## Caută candidați  {#if inputs.judet.value != true} în județul **{inputs.judet.value}** {/if}
+
 
   <Dropdown 
     data={xjudete} 
